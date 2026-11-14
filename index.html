@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuego en órbita: cómo arde una llama sin gravedad</title>
+<meta name="description" content="Qué sabemos del fuego en microgravedad, los gases de riesgo en una estación espacial y cómo se responde a un incendio.">
+<style>
+:root{--bg:#0e1430;--bg2:#161d40;--line:#2a3463;--tx:#e9ecf5;--mut:#9ba5c6;--fire:#ff9a3c;--cool:#6b97ff;--real:#5fd3a0;--hyp:#ffc15e;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--cool)}
+:focus-visible{outline:2px solid var(--fire);outline-offset:3px}
+.wrap{max-width:1020px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.15;margin:0}
+h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:400}
+h2{font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:400;margin-bottom:14px}
+h3{font-size:1.2rem;font-weight:400;margin-bottom:6px}
+p{margin:0 0 14px;max-width:68ch}
+nav{position:sticky;top:0;z-index:5;background:rgba(14,20,48,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:18px;overflow-x:auto;padding-top:12px;padding-bottom:12px;white-space:nowrap}
+nav a{color:var(--mut);text-decoration:none;font-size:.9rem}
+nav a:hover{color:var(--tx)}
+section{padding:64px 0;border-top:1px solid var(--line)}
+.hero{padding:70px 0 60px;border:0}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.lead{font-size:1.15rem;color:var(--mut)}
+.flames{display:flex;gap:34px;justify-content:center;align-items:flex-end;min-height:260px}
+.flames figure{margin:0;text-align:center;font-size:.85rem;color:var(--mut)}
+.tear{width:80px;height:190px;margin:0 auto 12px;border-radius:50% 50% 50% 50%/75% 75% 25% 25%;background:radial-gradient(ellipse at 50% 85%,#6b97ff 0,#6b97ff 12%,transparent 30%),linear-gradient(to top,#ff8a2a,#ffd36b 60%,#fff2c2);filter:blur(1px)}
+.sphere{width:150px;height:150px;margin:0 auto 12px;border-radius:50%;background:radial-gradient(circle,#ffb25a 0,#ff8a3c 25%,rgba(255,138,60,.15) 52%,transparent 58%),radial-gradient(circle,transparent 55%,#6b97ff 66%,transparent 74%);animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.05)}}
+@media (prefers-reduced-motion:reduce){.sphere{animation:none}html{scroll-behavior:auto}}
+.badge{display:inline-block;font-size:.78rem;padding:2px 10px;border-radius:99px;border:1px solid;margin-right:6px}
+.real{color:var(--real);border-color:var(--real)}
+.hyp{color:var(--hyp);border-color:var(--hyp)}
+.note{border-left:3px solid var(--hyp);background:var(--bg2);padding:12px 16px;margin:20px 0;max-width:72ch;font-size:.95rem}
+.tablewrap{overflow-x:auto;margin-top:18px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.93rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:500}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:26px;margin-top:20px}
+.cols article{border-top:2px solid var(--fire);padding-top:12px}
+.cols .d{color:var(--mut);font-size:.82rem;margin-bottom:8px}
+.bars{margin-top:22px;display:grid;gap:16px;max-width:760px}
+.bar b{display:block;font-weight:500;margin-bottom:4px}
+.track{height:14px;background:var(--bg2);border-radius:7px;position:relative;overflow:hidden}
+.track i{position:absolute;top:0;bottom:0;background:var(--fire);border-radius:7px}
+.bar small{color:var(--mut)}
+.scale{display:flex;justify-content:space-between;font-size:.78rem;color:var(--mut);max-width:760px;margin-top:4px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.filters button{background:none;color:var(--tx);border:1px solid var(--line);border-radius:99px;padding:6px 16px;font:inherit;font-size:.9rem;cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--fire);color:#1a1020;border-color:var(--fire)}
+.sc{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.sc article{background:var(--bg2);padding:16px 18px;border-radius:6px}
+.sc p{font-size:.92rem;margin-bottom:8px}
+ol.steps{padding-left:22px;max-width:70ch}
+ol.steps li{margin-bottom:8px}
+.lv{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:18px}
+.lv div{padding:14px 16px;border-radius:6px;background:var(--bg2);border-left:4px solid}
+.lv .a{border-color:var(--cool)}.lv .b{border-color:var(--hyp)}.lv .c{border-color:#ff6b5e}
+ul.src{padding-left:20px;font-size:.93rem;word-break:break-word}
+footer{padding:36px 0 60px;border-top:1px solid var(--line);color:var(--mut);font-size:.9rem}
+@media(max-width:760px){.hero .wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav aria-label="Secciones"><div class="wrap">
+<a href="#flama">La llama</a><a href="#experimentos">Experimentos</a><a href="#incidentes">Incidentes</a><a href="#gases">Gases</a><a href="#escenarios">Escenarios</a><a href="#respuesta">Respuesta</a><a href="#panel">Panel de IA</a><a href="#fuentes">Fuentes</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+<div>
+<h1>Una llama sin gravedad es una esfera</h1>
+<p class="lead">En órbita el humo no sube y el gas de una fuga viaja donde lo lleven los ventiladores. Esta página reúne lo que se sabe del fuego en microgravedad, los gases que lo hacen peligroso en una estación espacial y cómo se responde.</p>
+<p><span class="badge real">Dato documentado</span><span class="badge hyp">Escenario hipotético</span> Cada afirmación lleva una de estas dos etiquetas.</p>
+</div>
+<div class="flames" role="img" aria-label="Comparación de una llama en la Tierra, alargada, y una llama en microgravedad, esférica">
+<figure><div class="tear"></div>En la Tierra</figure>
+<figure><div class="sphere"></div>En microgravedad</figure>
+</div>
+</div></header>
+
+<section id="flama"><div class="wrap">
+<h2>Por qué el fuego cambia en órbita</h2>
+<p>En la Tierra los gases calientes suben y el aire frío entra por abajo; eso da a la llama su forma alargada y su parpadeo. En microgravedad ese flujo no existe y las llamas de baja velocidad tienden a ser redondeadas o esféricas.</p>
+<p>Los ventiladores de la nave sustituyen a la convección natural, y pueden llevar al fuego el aire que necesita. Por eso los detectores de humo se instalan en los conductos de ventilación y no en el techo.</p>
+<p>Un fuego se evita quitando uno de tres factores: combustible, oxígeno o energía de ignición. Con más oxígeno o más presión, materiales que normalmente no arden se encienden a menor temperatura y queman con más fuerza.</p>
+<p class="note">Falta conocimiento sobre gravedad parcial (Luna, Marte): NASA señala que los efectos sobre la inflamabilidad en niveles intermedios de gravedad no se han investigado.</p>
+</div></section>
+
+<section id="experimentos"><div class="wrap">
+<h2>Experimentos reales en la ISS y en naves Cygnus</h2>
+<p><span class="badge real">Dato documentado</span>Resumen cualitativo de investigaciones de NASA. Las cifras detalladas (velocidades de propagación, límites exactos) están en los informes técnicos de cada misión.</p>
+<div class="tablewrap"><table>
+<tr><th>Experimento</th><th>Dónde</th><th>Qué estudió</th><th>Hallazgo clave</th></tr>
+<tr><td>Saffire I–VI</td><td>Nave Cygnus no tripulada, tras separarse de la ISS</td><td>Propagación en muestras grandes de tela y plástico</td><td>Reducir la presión frena la propagación; en las pruebas IV y V el CO y el CO₂ subieron más que la temperatura</td></tr>
+<tr><td>ACME</td><td>Combustion Integrated Rack (CIR)</td><td>Seis estudios con llamas de gas, incluidos hollín y emulación de combustibles sólidos</td><td>Evalúa si los ensayos de inflamabilidad hechos en la Tierra sirven en microgravedad (59 ensayos del emulador BRE analizados)</td></tr>
+<tr><td>BASS-II</td><td>ISS</td><td>Sólidos con distintos flujos de aire, oxígeno y presión</td><td>El flujo de aire y el oxígeno deciden si la llama se propaga o se apaga</td></tr>
+<tr><td>FLEX y FLEX-2</td><td>CIR, con el aparato de gotas MDCA</td><td>Extinción y gotas de combustible líquido</td><td>Descubrieron llamas frías: el combustible sigue reaccionando sin llama visible y produce CO y formaldehído</td></tr>
+<tr><td>SoFIE-GEL</td><td>CIR (cámara SoFIE)</td><td>Cómo la temperatura del combustible afecta la inflamabilidad, con esferas sólidas</td><td>Las observaciones coinciden con las tendencias de los modelos</td></tr>
+<tr><td>Combustión confinada</td><td>ISS</td><td>Llamas entre paredes cercanas</td><td>El confinamiento puede aumentar o reducir la inflamabilidad según las condiciones</td></tr>
+<tr><td>FLARE (JAXA)</td><td>ISS</td><td>Inflamabilidad de materiales</td><td>Aporta datos para materiales de futuras misiones</td></tr>
+</table></div>
+</div></section>
+
+<section id="incidentes"><div class="wrap">
+<h2>Tres incidentes que cambiaron el diseño</h2>
+<p><span class="badge real">Dato documentado</span></p>
+<div class="cols">
+<article><h3>Apolo 1</h3><div class="d">27 de enero de 1967, prueba en tierra</div>
+<p>Un fuego en una cabina sellada con oxígeno puro a 16,7 psi mató a los tres astronautas. La ignición más probable fue eléctrica, con cableado y tuberías de refrigerante entre las fuentes sospechadas. Después se retiraron materiales inflamables y se rediseñó la escotilla.</p></article>
+<article><h3>Apolo 13</h3><div class="d">Abril de 1970, en vuelo</div>
+<p>El tanque 2 de oxígeno del módulo de servicio se rompió tras una explosión. NASA lo cita como el primer accidente relacionado con fuego sin flujo de flotabilidad. Se perdió todo el oxígeno en unas tres horas y la tripulación volvió en el módulo lunar.</p></article>
+<article><h3>Mir</h3><div class="d">Febrero de 1997, módulo Kvant-1</div>
+<p>Un cartucho de perclorato que generaba oxígeno se descontroló y ardió como un soplete. Hubo humo denso, máscaras y daños, sin heridos. Las pruebas posteriores señalan la espuma de agua como el agente más eficaz. Mostró además que un fuego pequeño puede generar mucho CO.</p></article>
+</div>
+</div></section>
+
+<section id="gases"><div class="wrap">
+<h2>Gases de riesgo</h2>
+<p>Para que haya fuego deben coincidir combustible, oxidante y una fuente de ignición. Recolectar un gas no lo vuelve inflamable: depende de su composición, concentración, presión y confinamiento.</p>
+<div class="bars" id="bars"></div>
+<div class="scale" style="max-width:760px"><span>0 %</span><span>concentración en aire</span><span>100 %</span></div>
+<p style="margin-top:14px;font-size:.92rem;color:var(--mut)">Valores de referencia en aire, a 1 atm y gravedad terrestre. Los marcados con * son habituales pero están pendientes de verificar en CAMEO o NIST. Las fuentes consultadas difieren en el límite superior del H₂ (75 % o 77 %).</p>
+<div class="cols">
+<article><h3>Oxígeno</h3><p>No arde, pero intensifica cualquier fuego. Una fuga puede enriquecer la atmósfera del módulo y hacer que cables, plásticos y tejidos ardan con más facilidad.</p></article>
+<article><h3>Monóxido de carbono</h3><p>Es combustible y tóxico. Puede salir de procesos como MOXIE (que convierte CO₂ marciano en oxígeno) y es también una señal temprana de incendio.</p></article>
+<article><h3>Amoníaco</h3><p>Sobre todo tóxico; se inflama con dificultad. Debe almacenarse separado de oxidantes y con control de fugas.</p></article>
+</div>
+<p class="note">El medio interestelar no es una fuente práctica de combustible por su baja densidad. Los gases que importan para una estación vienen de procesar recursos: agua lunar, CO₂ de Marte y sus productos (H₂, O₂, CH₄, CO).</p>
+</div></section>
+
+<section id="escenarios"><div class="wrap">
+<h2>Escenarios de accidente</h2>
+<p><span class="badge hyp">Escenario hipotético</span>Son situaciones técnicamente plausibles planteadas en el análisis de riesgos, no accidentes documentados. Sirven para entender cómo se encadenan las fallas. Elige un gas para filtrarlos.</p>
+<div class="filters" id="filters" role="group" aria-label="Filtrar por gas"></div>
+<div class="sc" id="sc" aria-live="polite"></div>
+</div></section>
+
+<section id="respuesta"><div class="wrap">
+<h2>Qué se hace ante un fuego en la ISS</h2>
+<p><span class="badge real">Dato documentado</span>Según el informe técnico OCHMO-TB-008 de NASA, la tripulación sigue estos pasos hasta apagar el fuego.</p>
+<ol class="steps">
+<li>Detección y alarma.</li>
+<li>Se corta la ventilación del módulo afectado; el software lo hace solo cuando detecta humo.</li>
+<li>La tripulación se pone las máscaras.</li>
+<li>Se retira a mano la energía de los equipos del módulo.</li>
+<li>Se usan los extintores: CO₂ en los módulos de EE. UU., agua o espuma en los rusos.</li>
+<li>Si persisten señales de fuego, se apaga el módulo.</li>
+<li>Se aísla el módulo cerrando escotillas si hay contaminantes o se usó CO₂.</li>
+<li>El módulo sigue aislado hasta que el aire depure CO, HCN y HCl a niveles admisibles.</li>
+</ol>
+<p>La estrategia se apoya sobre todo en la prevención: elegir materiales resistentes al fuego, controlar el oxígeno y vigilar la atmósfera de forma continua.</p>
+</div></section>
+
+<section id="panel"><div class="wrap">
+<h2>Una propuesta: panel de IA para prevenir incendios</h2>
+<p><span class="badge hyp">Escenario hipotético</span>Es un diseño conceptual, no un sistema existente. Combina sensores de gases, temperatura, presión, ventilación y estado de válvulas, y escala la respuesta en tres niveles.</p>
+<div class="lv">
+<div class="a"><h3>Preventivo</h3><p>Temperatura o presión anormal leve: alerta, diagnóstico y más muestreo de sensores.</p></div>
+<div class="b"><h3>Advertencia</h3><p>Fuga confirmada o sello deteriorado: aislar la sección, purgar la línea y avisar a la tripulación.</p></div>
+<div class="c"><h3>Emergencia</h3><p>Incendio activo o riesgo de explosión en cadena: aislar el módulo, suprimir el fuego y guiar la evacuación.</p></div>
+</div>
+<p class="note" style="margin-top:24px">Puntos por resolver antes de dar este diseño por bueno: una fuga se ventila, pero un fuego exige cortar la ventilación, así que el sistema debe distinguir ambos casos. Cerrar válvulas no siempre es un estado seguro (un reactor Sabatier sigue liberando calor). Y la alarma por gas debe sonar mucho antes del límite inferior de inflamabilidad.</p>
+</div></section>
+
+<section id="fuentes"><div class="wrap">
+<h2>Fuentes</h2>
+<p>Las dos primeras se contrastaron al preparar esta página. El resto está pendiente de revisión.</p>
+<ul class="src">
+<li><span class="badge real">Revisada</span><a href="https://www.nasa.gov/missions/station/iss-research/studying-combustion-and-fire-safety/">NASA: Studying Combustion and Fire Safety</a></li>
+<li><span class="badge real">Revisada</span><a href="https://www.nasa.gov/wp-content/uploads/2023/12/ochmo-tb-008-fire-protection.pdf">NASA OCHMO-TB-008: Fire Protection</a></li>
+<li><span class="badge hyp">Por revisar</span><a href="https://www.esa.int/Enabling_Support/Space_Engineering_Technology/No_fire_in_the_sky_preventing_an_astronaut_s_worst_nightmare">ESA: No fire in the sky</a></li>
+<li><span class="badge hyp">Por revisar</span><a href="https://science.nasa.gov/wp-content/uploads/2023/05/154_33f28c6ef0c27b92cf1f526cef0c44b4_Fire_detection_white_paper_final_211031.pdf">NASA: Fire detection white paper</a></li>
+<li><span class="badge hyp">Por revisar</span><a href="https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/20030053429.pdf">NASA NTRS 20030053429</a></li>
+<li><span class="badge hyp">Por revisar</span><a href="https://www.nist.gov/publications/physical-and-chemical-aspects-fire-suppression-extraterrestrial-environments">NIST: Fire suppression in extraterrestrial environments</a></li>
+<li><span class="badge hyp">Por revisar</span><a href="https://wsn.spaceflight.esa.int/docs/Factsheets/30%20ECLSS%20LR.pdf">ESA: ficha técnica ECLSS</a></li>
+<li><span class="badge hyp">Por revisar</span><a href="https://saemobilus.sae.org/papers/fire-response-aboard-international-space-station-972334">SAE 972334: Fire response aboard the ISS</a></li>
+</ul>
+</div></section>
+
+<footer><div class="wrap">Proyecto educativo. No sustituye a las normas ni a los procedimientos oficiales de NASA o ESA.</div></footer>
+
+<script>
+const GASES=[
+ {n:"Hidrógeno (H₂)",a:4,b:75,t:"4–75 %"},
+ {n:"Metano (CH₄)",a:5,b:15,t:"5–15 %"},
+ {n:"Monóxido de carbono (CO)*",a:12.5,b:74,t:"≈12,5–74 %"},
+ {n:"Amoníaco (NH₃)*",a:15,b:28,t:"≈15–28 %"}
+];
+document.getElementById("bars").innerHTML=GASES.map(g=>`<div class="bar"><b>${g.n} <small>${g.t}</small></b><div class="track" role="img" aria-label="Inflamable entre ${g.a} y ${g.b} por ciento"><i style="left:${g.a}%;width:${g.b-g.a}%"></i></div></div>`).join("");
+
+const SC=[
+ {g:["H₂","O₂"],n:"Fuga de hidrógeno tras la electrólisis",f:"Una fisura en una conexión o sello suelta H₂ en un compartimento cerrado.",c:"Incendio localizado y aumento de presión.",p:"Sensores de H₂ dedicados y válvulas de aislamiento automáticas."},
+ {g:["CH₄","O₂"],n:"Metano que entra en una línea de oxígeno",f:"Una válvula defectuosa o un error de conexión mezcla ambos gases.",c:"Combustión rápida; sobrepresión si está confinada.",p:"Circuitos independientes y detección antes del límite de inflamabilidad."},
+ {g:["O₂"],n:"Aceite o grasa en tuberías de oxígeno",f:"Residuos del mantenimiento se encienden por fricción, impacto o calor local.",c:"Ignición del contaminante y propagación a otros componentes.",p:"Limpieza de grado oxígeno y materiales compatibles."},
+ {g:["H₂","CH₄","O₂"],n:"Sobrecalentamiento al separar gases",f:"Falla un intercambiador o la refrigeración mientras un compresor trabaja.",c:"Sellos deteriorados, fugas y posible ignición posterior.",p:"Sensores de temperatura y presión, y apagado de emergencia."},
+ {g:["CO","O₂"],n:"Monóxido de carbono en la línea de oxígeno",f:"Una membrana separadora se deteriora en un equipo tipo MOXIE.",c:"Combustión y, además, intoxicación de la tripulación.",p:"Sensores dobles de CO y O₂, y purga segura al exterior."},
+ {g:["O₂"],n:"Polvo o partículas en la captación",f:"Un filtro saturado deja pasar partículas a un circuito rico en oxígeno.",c:"Posible ignición por impacto de partículas.",p:"Filtros redundantes y vigilancia de la presión diferencial."},
+ {g:["O₂","CH₄"],n:"Falla del sistema criogénico",f:"Falla el control térmico del oxígeno líquido.",c:"Reacción intensa si encuentra hidrocarburos; riesgo por expansión.",p:"Protección térmica y sensores en las paredes de los depósitos."},
+ {g:["H₂","CH₄","O₂"],n:"Retorno de gases por una válvula",f:"Una válvula antirretorno se atasca y un gas vuelve a otra línea.",c:"Combustión dentro de tuberías y daño de reguladores.",p:"Válvulas redundantes y sensores de flujo en ambos sentidos."},
+ {g:["H₂","CH₄","CO"],n:"Fuga hacia la ventilación",f:"Los ventiladores arrastran el gas lejos del punto de la fuga.",c:"Un incendio puede empezar en un lugar distinto al origen.",p:"Sensores repartidos por todo el sistema de ventilación."},
+ {g:["H₂","CH₄","CO","O₂"],n:"Incendio en cadena",f:"Un fuego inicial calienta un depósito cercano y libera combustible.",c:"Una segunda ignición que compromete otros módulos.",p:"Compartimentación, barreras térmicas y detección de propagación."}
+];
+const F=document.getElementById("filters"),L=document.getElementById("sc");
+const OPT=["Todos","H₂","CH₄","CO","O₂"];
+function draw(sel){
+ F.innerHTML=OPT.map(o=>`<button aria-pressed="${o===sel}" data-o="${o}">${o}</button>`).join("");
+ L.innerHTML=SC.filter(s=>sel==="Todos"||s.g.includes(sel)).map(s=>`<article><h3>${s.n}</h3><p><b>Cómo ocurriría:</b> ${s.f}</p><p><b>Consecuencia:</b> ${s.c}</p><p><b>Prevención:</b> ${s.p}</p></article>`).join("");
+}
+F.addEventListener("click",e=>{const o=e.target.dataset.o;if(o)draw(o)});
+draw("Todos");
+</script>
+</body>
+</html>
